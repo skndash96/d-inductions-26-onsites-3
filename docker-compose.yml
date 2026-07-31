@@ -1,1 +1,30 @@
-# TODO: fill this
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+      - sqlite_data:/app/instance
+    expose: 
+      - "5000"
+
+  frontend:
+    build: ./frontend
+    volumes:
+    - ./frontend:/app
+    - /app/node_modules
+    - dist_assets:/app/dist
+
+  ngnix:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - dist_assets:/usr/share/nginx/html/app:ro
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  sqlite_data:                     
+  dist_assets:

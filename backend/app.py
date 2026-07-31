@@ -10,10 +10,10 @@ app = Flask(__name__)
 app.secret_key = "change-me-in-production"
 
 
-app.config.update(
-    SESSION_COOKIE_SAMESITE="None",
-    SESSION_COOKIE_SECURE=True,
-)
+#app.config.update(
+#    SESSION_COOKIE_SAMESITE="None",
+#    SESSION_COOKIE_SECURE=True,
+#)
 
 db.init_db()
 
